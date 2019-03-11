@@ -20,14 +20,15 @@ export default class Cable {
 		Vue.prototype.$cable = this;
 		Vue.mixin(Mixin);
 
-		const { debug, debugLevel, connectionUrl } = options || {
+		const { debug, debugLevel, connectionUrl, connectImmediately } = options || {
 			debug: false,
 			debugLevel: 'error',
-			connectionUrl: null
+			connectionUrl: null,
+			connectImmediately: true,
 		};
 
 		this._logger = new Logger(debug, debugLevel);
-		this._connect(connectionUrl);
+		if (connectImmediately) this._connect(connectionUrl);
 	}
 
 	/**
