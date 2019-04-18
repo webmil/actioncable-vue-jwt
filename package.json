@@ -1,6 +1,6 @@
 {
 	"name": "actioncable-vue-jwt",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "A Vue plugin that makes integrating ActionCable with JWT easy.",
 	"main": "dist/actioncablevuejwt.js",
 	"keywords": [

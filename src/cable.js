@@ -7,6 +7,8 @@ export default class Cable {
 	_cable = null;
 	_channels = { subscriptions: {} };
 	_contexts = {};
+	_connectionUrl = null;
+	_jwt = function() { return undefined };
 
 	/**
 	 * ActionCableVueJwt $cable entry point
@@ -30,7 +32,9 @@ export default class Cable {
 		};
 
 		this._logger = new Logger(debug, debugLevel);
-		if (connectImmediately) this._connect(connectionUrl);
+		this._connectionUrl = connectionUrl;
+		this._jwt = jwt;
+		if (connectImmediately) this._connect(connectionUrl, jwt);
 	}
 
 	/**
@@ -62,7 +66,7 @@ export default class Cable {
 				}
 			});
 		} else {
-			throw new Error(`ActionCableVueJWT not initialized.`);
+			this._connect(this._connectionUrl, this._jwt);
 		}
 	}
 
