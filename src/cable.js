@@ -1,4 +1,4 @@
-import actioncable from 'actioncable';
+import actioncable from './actioncable';
 import Logger from './logger';
 import Mixin from './mixin';
 
@@ -9,22 +9,24 @@ export default class Cable {
 	_contexts = {};
 
 	/**
-	 * ActionCableVue $cable entry point
+	 * ActionCableVueJwt $cable entry point
 	 * @param {Object} Vue
 	 * @param {Object} options - ActionCableVue options
 	 * @param {string} options.connectionUrl - ActionCable server websocket URL
 	 * @param {boolean} options.debug - Enable logging for debug
 	 * @param {string} options.debugLevel - Debug level required for logging. Either `info`, `error`, or `all`
+	 * @param {function} jwt - Function that can be called to retrieve the JSON Web Token for the current user
 	 */
 	constructor(Vue, options) {
 		Vue.prototype.$cable = this;
 		Vue.mixin(Mixin);
 
-		const { debug, debugLevel, connectionUrl, connectImmediately } = options || {
+		const { debug, debugLevel, connectionUrl, connectImmediately, jwt } = options || {
 			debug: false,
 			debugLevel: 'error',
 			connectionUrl: null,
 			connectImmediately: true,
+			jwt: function() { return null }
 		};
 
 		this._logger = new Logger(debug, debugLevel);
@@ -60,7 +62,7 @@ export default class Cable {
 				}
 			});
 		} else {
-			throw new Error(`ActionCableVue not initialized.`);
+			throw new Error(`ActionCableVueJWT not initialized.`);
 		}
 	}
 
@@ -152,9 +154,10 @@ export default class Cable {
 	/**
 	 * Connects to an Action Cable server
 	 * @param {string} url - The websocket URL of the Action Cable server.
+	 * @param {function} jwt - A function to retrieve the JSON Web Token to use
 	 */
-	_connect(url) {
-		if (typeof url == 'string') this._cable = actioncable.createConsumer(url);
+	_connect(url, jwt) {
+		if (typeof url == 'string') this._cable = actioncable.createConsumer(url, jwt());
 		else {
 			throw new Error(
 				'Connection URL needs to be a valid Action Cable websocket server URL.'

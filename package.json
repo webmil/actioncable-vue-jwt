@@ -1,15 +1,16 @@
 {
-	"name": "actioncable-vue",
-	"version": "1.2.4",
-	"description": "A Vue plugin that makes integrating ActionCable easy.",
-	"main": "dist/actioncablevue.js",
+	"name": "actioncable-vue-jwt",
+	"version": "1.0.0",
+	"description": "A Vue plugin that makes integrating ActionCable with JWT easy.",
+	"main": "dist/actioncablevuejwt.js",
 	"keywords": [
 		"actioncable",
 		"vue",
 		"vuejs",
 		"rails",
 		"real-time",
-		"websocket"
+		"websocket",
+		"jwt"
 	],
 	"scripts": {
 		"build": "webpack --mode=production --progress --hide-modules",
@@ -18,17 +19,14 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/mclintprojects/actioncable-vue.git"
+		"url": "git+https://github.com/requnix/actioncable-vue-jwt.git"
 	},
-	"author": "Mbah Clinton",
+	"author": "Michael Prins",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/mclintprojects/actioncable-vue/issues"
+		"url": "https://github.com/requnix/actioncable-vue-jwt/issues"
 	},
-	"homepage": "https://github.com/mclintprojects/actioncable-vue#readme",
-	"dependencies": {
-		"actioncable": "^5.2.2"
-	},
+	"homepage": "https://github.com/requnix/actioncable-vue-jwt#readme",
 	"devDependencies": {
 		"@babel/core": "^7.1.2",
 		"@babel/plugin-proposal-class-properties": "^7.1.0",

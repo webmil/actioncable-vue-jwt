@@ -1,29 +1,33 @@
 <p align="center">
-  <a href="https://travis-ci.org/mclintprojects/actioncable-vue"><img src="https://travis-ci.org/mclintprojects/actioncable-vue.svg?branch=master" /></a>
-  <a href="https://www.npmjs.com/package/actioncable-vue"><img src="https://img.shields.io/npm/v/actioncable-vue.svg"/> <img src="https://img.shields.io/npm/dt/actioncable-vue.svg"/></a>
+  <a href="https://travis-ci.org/requnix/actioncable-vue-jwt"><img src="https://travis-ci.org/requnix/actioncable-vue-jwt.svg?branch=master" /></a>
+  <a href="https://www.npmjs.com/package/actioncable-vue-jwt"><img src="https://img.shields.io/npm/v/actioncable-vue-jwt.svg"/> <img src="https://img.shields.io/npm/dt/actioncable-vue-jwt.svg"/></a>
   <a href="https://github.com/vuejs/awesome-vue"><img src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"/></a>
   <a href="https://vuejs.org/"><img src="https://img.shields.io/badge/vue-2.x-brightgreen.svg"/></a>
-  <a href="https://github.com/mclintprojects/actioncable-vue/"><img src="https://img.shields.io/npm/l/actioncable-vue.svg"/></a>
-  <a href="https://github.com/mclintprojects/actioncable-vue/"><img src="https://img.shields.io/github/stars/mclintprojects/actioncable-vue.svg"/></a>
+  <a href="https://github.com/requnix/actioncable-vue-jwt/"><img src="https://img.shields.io/npm/l/actioncable-vue-jwt.svg"/></a>
+  <a href="https://github.com/requnix/actioncable-vue-jwt/"><img src="https://img.shields.io/github/stars/requnix/actioncable-vue-jwt.svg"/></a>
 </p>
 
-<p>ActionCableVue is an easy-to-use Action Cable integration for VueJS.<p>
+ActionCableVueJWT is an easy-to-use Action Cable integration for VueJS when using JSON Web Tokens.
+
+NOTE: ActionCableVueJWT was forked from [ActionCableVue](https://www.npmjs.com/package/actioncable-vue) in order to add JWT authentication in the same vein as `action-cable-react-jwt`. If you do not need JWT authentication, rather use ActionCableVue.
 
 #### 🚀 Installation
 
 ```bash
-npm install actioncable-vue --save
+npm install actioncable-vue-jwt --save
 ```
 
 ```javascript
 import Vue from 'vue';
 import App from './App.vue';
-import ActionCableVue from 'actioncable-vue';
+import ActionCableVueJWT from 'actioncable-vue-jwt';
 
-Vue.use(ActionCableVue, {
+Vue.use(ActionCableVueJWT, {
 	debug: true,
 	debugLevel: 'error',
-	connectionUrl: 'ws://localhost:5000/api/cable'
+	connectionUrl: 'ws://localhost:5000/api/cable',
+	connectImmediately: false,
+	jwt: function() { this.$auth.getToken() }
 });
 
 new Vue({
@@ -33,11 +37,13 @@ new Vue({
 }).$mount('#app');
 ```
 
-| **Parameters** | **Type** | **Default** | **Required** | **Description**                                                    |
-| -------------- | -------- | ----------- | ------------ | ------------------------------------------------------------------ |
-| debug          | Boolean  | `false`     | Optional     | Enable logging for debug                                           |
-| debugLevel     | String   | `error`     | Optional     | Debug level required for logging. Either `info`, `error`, or `all` |
-| connectionUrl  | String   | `null`      | Required     | ActionCable websocket server url                                   |
+| **Parameters**     | **Type** | **Default** | **Required** | **Description**                                                    |
+| ------------------ | -------- | ------------ | ------------ | ------------------------------------------------------------------ |
+| debug              | Boolean  | `false`      | Optional     | Enable logging for debug                                           |
+| debugLevel         | String   | `error`      | Optional     | Debug level required for logging. Either `info`, `error`, or `all` |
+| connectionUrl      | String   | `null`       | Required     | ActionCable websocket server url                                   |
+| connectImmediately | Boolean  | `true`       | Optional     | Connect on initialization, otherwise first subscription            |
+| jwt                | Function | `null`       | Optional     | A way to obtain the JWT for the current user                       |
 
 #### 🌈 Component Level Usage
 

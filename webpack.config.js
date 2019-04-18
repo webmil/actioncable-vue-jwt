@@ -2,10 +2,10 @@ module.exports = {
 	mode: process.env.NODE_ENV,
 	entry: ['./src/index.js'],
 	output: {
-		library: 'ActionCableVue',
+		library: 'ActionCableVueJWT',
 		libraryTarget: 'umd',
 		libraryExport: 'default',
-		filename: 'actioncablevue.js',
+		filename: 'actioncablevuejwt.js',
 		globalObject: "typeof self !== 'undefined' ? self : this"
 	},
 	module: {

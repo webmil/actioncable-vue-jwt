@@ -1,6 +1,6 @@
 import Cable from './cable';
 
-const ActionCableVue = {
+const ActionCableVueJWT = {
 	/**
 	 * ActionCableVue entry point
 	 * @param Vue
@@ -8,10 +8,11 @@ const ActionCableVue = {
 	 * @param {string} options.connectionUrl - ActionCable server websocket URL
 	 * @param {boolean} options.debug - Enable logging for debug
 	 * @param {string} options.debugLevel - Debug level required for logging. Either `info`, `error`, or `all`
+	 * @param {function} jwt - Function that can be called to retrieve the JSON Web Token for the current user
 	 */
 	install(Vue, options) {
 		new Cable(Vue, options);
 	}
 };
 
-export default ActionCableVue;
+export default ActionCableVueJWT;
