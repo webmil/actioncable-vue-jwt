@@ -496,7 +496,7 @@ function createWebSocketURL(url) {
 }
 function createConsumer() {
   var url = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : getConfig("url") || INTERNAL.default_mount_path;
-  var token = arguments.length > 1 && arguments[1] !== undefined ? arguments[1]() : null;
+  var token = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
   return new Consumer(url, token);
 }
