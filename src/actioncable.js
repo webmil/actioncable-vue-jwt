@@ -462,6 +462,11 @@ var Consumer = function() {
   Consumer.prototype.connect = function connect() {
     return this.connection.open();
   };
+  Consumer.prototype.updateToken = function updateToken(token) {
+    this.disconnect();
+    this._token = token;
+    this.connect();
+  }
   Consumer.prototype.disconnect = function disconnect() {
     return this.connection.close({
       allowReconnect: false
